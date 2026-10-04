@@ -1,6 +1,6 @@
 {
   "name": "@gbesse/jev-alimconfiance-followup",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Compare des contrôles sanitaires successifs et prépare une conclusion de suivi sourcée et révisable.",
   "type": "module",
   "license": "MIT",

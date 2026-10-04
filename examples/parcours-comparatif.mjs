@@ -1,4 +1,5 @@
 // Objectif : produire un rapport hors ligne comparant les trois chemins de décision.
+import assert from "node:assert/strict";
 import { assessInspectionFollowup } from "../src/index.mjs";
 import { createFakeProvider } from "../src/jev.mjs";
 const principal = {
@@ -79,4 +80,10 @@ for (const [scénario, dossier] of [["principal", principal], ["limite détermin
   const résultat = await assessInspectionFollowup(dossier, provider);
   résultats.push({ scénario, décision: résultat.label, revueHumaine: résultat.review, déterministe: résultat.deterministic });
 }
+assert.deepEqual(résultats.map((r) => [r.décision, r.revueHumaine, r.déterministe]), [
+  ["amelioration_etayee", false, false],
+  ["aucun_controle_fourni", false, true],
+  ["revue_requise", true, false],
+]);
+assert.equal(provider.calls, 2);
 console.log(JSON.stringify({ dépôt: "jev-alimconfiance-followup", résultats }, null, 2));
